@@ -2,10 +2,59 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>GitBook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tienda de Libros</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Bienvenido a GitBook 📚</h1>
-  <p>Tu app web ya está corriendo en Azure Static Web Apps.</p>
+
+  <header>
+    <h1>📚 Librería Online</h1>
+    <nav>
+      <a href="#libros">Catálogo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Descubre tu próximo libro favorito</h2>
+    <p>Envíos rápidos, ofertas exclusivas y una gran variedad de títulos.</p>
+    <a href="#libros" class="btn">Ver Catálogo</a>
+  </section>
+
+  <section id="libros" class="catalogo">
+    <h2>📘 Nuestros Libros</h2>
+    <div class="libros-container">
+      <div class="libro">
+        <img src="https://via.placeholder.com/150" alt="Libro 1">
+        <h3>El Principito</h3>
+        <p>S/. 29.90</p>
+        <button onclick="comprar('El Principito')">Comprar</button>
+      </div>
+      <div class="libro">
+        <img src="https://via.placeholder.com/150" alt="Libro 2">
+        <h3>Cien Años de Soledad</h3>
+        <p>S/. 39.90</p>
+        <button onclick="comprar('Cien Años de Soledad')">Comprar</button>
+      </div>
+      <div class="libro">
+        <img src="https://via.placeholder.com/150" alt="Libro 3">
+        <h3>1984</h3>
+        <p>S/. 34.90</p>
+        <button onclick="comprar('1984')">Comprar</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contacto">
+    <h2>📞 Contáctanos</h2>
+    <p>Correo: contacto@libreria.com | WhatsApp: +51 999 999 999</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Librería Online. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
