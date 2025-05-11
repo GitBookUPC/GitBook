@@ -15,17 +15,17 @@ function menuBtnChange() {
 }
 
 document.getElementById('inicio').addEventListener('click', function () {
-  document.getElementById('content-frame').src = '/views/Inicio.html';
+  document.getElementById('content-frame').src = 'views/Inicio.html';
 });
 
 document.getElementById('busqueda').addEventListener('click', function () {
-  document.getElementById('content-frame').src = '/views/Busqueda.html';
+  document.getElementById('content-frame').src = 'views/Busqueda.html';
 });
 
 document.getElementById('carrito').addEventListener('click', function () {
-  document.getElementById('content-frame').src = '/views/Carrito.html';
+  document.getElementById('content-frame').src = 'views/Carrito.html';
 });
 
 window.onload = function () {
-  document.getElementById("content-frame").src = "/views/Inicio.html";
+  document.getElementById("content-frame").src = "views/Inicio.html";
 };
