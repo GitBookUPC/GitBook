@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito - GitBook</title>
+  <link rel="stylesheet" href="/css/Busqueda.css" />
+</head>
+<body>
+  <div class="contenedor_general">
+    <div class="contenedor_bienvenido">
+      <h1>TU CARRITO DE COMPRAS</h1>
+      <p>Revisa los libros que has seleccionado y procede con el pago.</p>
+    </div>
+
+    <div class="contenedor-noticias">
+      <h2 class="titulo">📚 Libros Seleccionados</h2>
+      <div id="lista-carrito" class="noticias"></div>
+    </div>
+
+    <div class="contenedor-promociones">
+      <h2 class="titulo">💳 Resumen y Pago</h2>
+      <div id="resumen-compra">
+        <p><strong>Total:</strong> S/ <span id="total">0.00</span></p>
+        <button onclick="pagar()" style="padding: 10px 20px; background-color: #2e7d32; color: white; border: none; border-radius: 5px; font-weight: bold;">Pagar ahora</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2025 GitBook. Todos los derechos reservados.</footer>
+  <script src="/js/Carrito.js"></script>
+</body>
+</html>
