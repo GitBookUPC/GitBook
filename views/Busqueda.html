@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Librería GitBook</title>
+  <link rel="stylesheet" href="/css/Busqueda.css" />
+</head>
+<body>
+  <div class="contenedor_general">
+    <div class="contenedor_bienvenido">
+      <h1>BUSCADOR DE LIBROS</h1>
+      <p>Encuentra tus títulos favoritos entre nuestras colecciones disponibles.</p>
+
+      <!-- Buscador de Libros -->
+      <div class="buscador-libros">
+        <input type="text" id="search-bar" class="campo-busqueda" placeholder="Buscar libros..." />
+        <button id="search-btn" class="icono-lupa">🔍</button>
+      </div>
+    </div>
+
+    <!-- Resultados o libros disponibles -->
+    <div class="contenedor-libros">
+      <div class="noticias">
+        <div class="tarjeta-noticia">
+          <img src="/img/tmala.png" alt="Travesuras de la niña mala">
+          <h3>Travesuras de la niña mala</h3>
+          <a href="#" onclick="agregarAlCarrito('Travesuras de la niña mala', '/img/tmala.png', 34.90)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+          <img src="/img/colera.png" alt="El amor en los tiempos del cólera">
+          <h3>El amor en los tiempos del cólera</h3>
+          <a href="#" onclick="agregarAlCarrito('El amor en los tiempos del cólera', '/img/colera.png', 31.90)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+          <img src="/img/kafka.png" alt="La metamorfosis de Kafka">
+          <h3>La metamorfosis</h3>
+          <a href="#" onclick="agregarAlCarrito('La metamorfosis', '/img/kafka.png', 29.90)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+          <img src="/img/1984k.jpg" alt="1984">
+          <h3>1984</h3>
+          <a href="#" onclick="agregarAlCarrito('1984', '/img/1984k.jpg', 32.50)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+          <img src="/img/rayuela.jpeg" alt="Rayuela">
+          <h3>Rayuela</h3>
+          <a href="#" onclick="agregarAlCarrito('Rayuela', 'img/rayuela.jpeg', 35.00)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+          <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c" alt="Orgullo y prejuicio">
+          <h3>Orgullo y prejuicio</h3>
+          <a href="#" onclick="agregarAlCarrito('Orgullo y prejuicio', 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c', 28.90)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+          <img src="/img/cduma.jpeg" alt="Crónica de una muerte anunciada">
+          <h3>Crónica de una muerte anunciada</h3>
+          <a href="#" onclick="agregarAlCarrito('Crónica de una muerte anunciada', '/img/cduma.jpeg', 30.00)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+          <img src="/img/100ads.jpeg" alt="Cien años de soledad">
+          <h3>Cien años de soledad</h3>
+          <a href="#" onclick="agregarAlCarrito('Cien años de soledad', '/img/100ads.jpeg', 33.90)">Agregar al carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 GitBook. Todos los derechos reservados.
+  </footer>
+
+  <script src="/js/Busqueda.js"></script>
+  <script>
+    function agregarAlCarrito(titulo, imagen, precio) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.push({ titulo, imagen, precio });
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      alert(`"${titulo}" fue añadido al carrito 🛒`);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+/* RESET STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f9f4;
+    color: #2e4d34;
+  }
+  
+  /* Contenedor principal */
+  .contenedor_general {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Bienvenida */
+  .contenedor_bienvenido h1 {
+    text-align: center;
+    color: #2e8b57;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    animation: fadeInEffect 2s ease-in-out;
+  }
+  
+  .contenedor_bienvenido p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #3b5d46;
+    margin-bottom: 30px;
+  }
+  
+  /* Animación */
+  @keyframes fadeInEffect {
+    0% { opacity: 0; transform: translateY(-50px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Sección Noticias Literarias */
+  .contenedor-noticias {
+    background-color: #e6f3ea;
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+  
+  .titulo {
+    text-align: center;
+    font-size: 28px;
+    color: #2e8b57;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 6px;
+    border-bottom: 3px solid #2e8b57;
+  }
+  
+  .noticias {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+  }
+  
+  .tarjeta-noticia {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 80, 50, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .tarjeta-noticia:hover {
+    transform: translateY(-5px);
+  }
+  
+  .tarjeta-noticia img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .tarjeta-noticia h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #2e4d34;
+  }
+  
+  .tarjeta-noticia p {
+    font-size: 14px;
+    color: #445d4a;
+    margin-bottom: 10px;
+    flex-grow: 1;
+  }
+  
+  .tarjeta-noticia a {
+    font-size: 14px;
+    color: #2e8b57;
+    text-decoration: none;
+    font-weight: bold;
+    align-self: flex-start;
+  }
+  
+  .tarjeta-noticia a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Sección de Promociones */
+  .contenedor-promociones {
+    background-color: #e0f5e9;
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+  
+  .contenedor-promociones .titulo {
+    color: #2e7d32;
+  }
+  
+  .contenedor-promociones .tarjeta-noticia {
+    border: 1px solid #c8e6c9;
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.1);
+  }
+  
+  .contenedor-promociones .tarjeta-noticia a {
+    background-color: #2e7d32;
+    color: #ffffff;
+    padding: 8px 12px;
+    display: inline-block;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .contenedor-promociones .tarjeta-noticia a:hover {
+    background-color: #27642a;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .contenedor_bienvenido h1 {
+      font-size: 2rem;
+    }
+  
+    .contenedor_bienvenido p {
+      font-size: 1rem;
+    }
+  
+    .titulo {
+      font-size: 22px;
+    }
+  
+    .noticias {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  /* --- EFECTO ENTRADA DE TARJETAS --- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* --- TÍTULO PRINCIPAL --- */
+  .contenedor_bienvenido h1 {
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px #d1e7db;
+  }
+  
+  /* --- SUBTÍTULO --- */
+  .contenedor_bienvenido p {
+    font-size: 1.2rem;
+    color: #3a5a47;
+    margin-top: -10px;
+    margin-bottom: 30px;
+  }
+  
+  /* --- ETIQUETA DE PROMOCIÓN --- */
+  .promo-badge {
+    background-color: #2e8b57;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 5px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  }
+  
+  /* --- FOOTER --- */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: #777;
+    background-color: #f0f5f0;
+    margin-top: 40px;
+    border-top: 1px solid #dcdcdc;
+  }
+  
+  /* Buscador de Libros */
+  .buscador-libros {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .campo-busqueda {
+    width: 500px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .icono-lupa {
+    font-size: 20px;
+    margin-left: -35px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  

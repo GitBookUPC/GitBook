@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Librería GitBook</title>
+  <link rel="stylesheet" href="/css/Inicio.css" />
+</head>
+<body>
+  <div class="contenedor_general">
+    <div class="contenedor_bienvenido">
+      <h1>BIENVENIDO A GITBOOK</h1>
+      <p>Tu tienda virtual de libros favoritos, novedades editoriales y más.</p>
+    </div>
+
+    <div class="contenedor-noticias">
+      <h2 class="titulo">Novedades del mundo literario 📚</h2>
+      <div class="noticias">
+        <div class="tarjeta-noticia">
+          <img src="https://images.unsplash.com/photo-1544717305-2782549b5136" alt="Club de lectura virtual">
+          <h3>Nuevos clubes de lectura online</h3>
+          <p>Descubre cómo participar en comunidades de lectura temáticas desde casa. Comparte ideas y libros.</p>
+          <a href="https://blog.libranda.com/clubes-de-lectura-virtuales/" target="_blank">Leer más</a>
+        </div>
+        <div class="tarjeta-noticia">
+          <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4" alt="Tendencias en literatura juvenil">
+          <h3>Tendencias en literatura juvenil 2025</h3>
+          <p>Lo más leído por jóvenes en 2025 incluye fantasía, ciencia ficción y temas de salud mental.</p>
+          <a href="https://www.publishersweekly.com/" target="_blank">Ver detalles</a>
+        </div>
+        <div class="tarjeta-noticia">
+          <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e" alt="Feria del libro 2025">
+          <h3>Próxima Feria del Libro de Lima</h3>
+          <p>Participa del mayor evento literario del país con descuentos, talleres y firma de autores.</p>
+          <a href="https://fil-lima.com.pe/" target="_blank">Registrarse</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contenedor-promociones">
+      <h2 class="titulo">📖 Libros en Promoción</h2>
+      <div class="noticias">
+        <div class="tarjeta-noticia">
+          <img src="/img/tmala.png" alt="Travesuras de la niña mala">
+          <h3>Travesuras de la niña mala</h3>
+          <p>Una historia apasionante de amor y obsesión escrita por Mario Vargas Llosa. ¡Ahora con 25% de descuento!</p>
+          <a href="#" onclick="agregarAlCarrito('Travesuras de la niña mala', '/img/tmala.png', 34.90)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+          <img src="/img/colera.png" alt="El amor en los tiempos del cólera">
+          <h3>El amor en los tiempos del cólera</h3>
+          <p>Gabriel García Márquez te sumerge en una historia eterna de pasión y espera. Precio especial esta semana.</p>
+          <a href="#" onclick="agregarAlCarrito('El amor en los tiempos del cólera', '/img/colera.png', 31.90)">Agregar al carrito</a>
+        </div>
+
+        <div class="tarjeta-noticia">
+        
+          <img src="/img/kafka.png" alt="La metamorfosis de Kafka">
+          <h3>La metamorfosis</h3>
+          <p>La obra más reconocida de Franz Kafka. Una alegoría existencial imperdible, disponible por S/ 29.90.</p>
+          <a href="#" onclick="agregarAlCarrito('La metamorfosis', '/img/kafka.png', 29.90)">Agregar al carrito</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 GitBook. Todos los derechos reservados.
+    </footer>
+  </div>
+
+  <script src="/js/Inicio.js"></script>
+  <script>
+    function agregarAlCarrito(titulo, imagen, precio) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.push({ titulo, imagen, precio });
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      alert(`"${titulo}" fue añadido al carrito 🛒`);
+    }
+  </script>
+</body>
+</html>
