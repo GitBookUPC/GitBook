@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Categorías - GitBook</title>
+  <link rel="stylesheet" href="../css/Categorias.css" />
+</head>
+<body>
+  <div class="contenedor_general">
+    <div class="contenedor_bienvenido">
+      <h1>Categorías</h1>
+      <p>Selecciona una categoría para ver los libros disponibles.</p>
+    </div>
+
+    <div class="contenedor-categorias">
+      <ul id="lista-categorias"></ul>
+    </div>
+
+    <div class="contenedor-libros">
+      <div id="lista-libros" class="noticias"></div>
+    </div>
+  </div>
+  <!-- Modal de detalle -->
+  <div id="modal-detalle" class="modal">
+    <div class="modal-content">
+      <span id="cerrar-modal" class="close">&times;</span>
+      <img id="detalle-imagen" src="" alt="Portada" />
+      <h2 id="detalle-titulo"></h2>
+      <p id="detalle-descripcion"></p>
+      <p><strong>Precio:</strong> S/ <span id="detalle-precio"></span></p>
+      <p><strong>Categoría:</strong> <span id="detalle-categoria"></span></p>
+      <p><strong>Autores:</strong> <span id="detalle-autores"></span></p>
+      <button id="btn-agregar-detalle">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/Categorias.js"></script>
+</body>
+</html>

@@ -25,7 +25,12 @@ document.getElementById('busqueda').addEventListener('click', function () {
 document.getElementById('carrito').addEventListener('click', function () {
   document.getElementById('content-frame').src = 'views/Carrito.html';
 });
-
+document.getElementById('login').addEventListener('click', function () {
+  document.getElementById('content-frame').src = 'views/Login.html';
+});
+document.getElementById('categorias').addEventListener('click', function () {
+  document.getElementById('content-frame').src = 'views/Categorias.html';
+});
 window.onload = function () {
   document.getElementById("content-frame").src = "views/Inicio.html";
 };

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalle de Libro - GitBook</title>
+  <link rel="stylesheet" href="../css/DetalleLibro.css" />
+</head>
+<body>
+  <div class="contenedor_general detalle-contenedor">
+    <button id="btn-volver" class="btn-volver">← Volver</button>
+    <div class="detalle-grid">
+      <div class="detalle-imagen">
+        <img id="img-portada" src="" alt="Portada" />
+      </div>
+      <div class="detalle-info">
+        <h1 id="titulo-libro"></h1>
+        <p id="categoria-libro" class="categoria-badge"></p>
+        <p id="autores-libro" class="autores"></p>
+        <p id="descripcion-libro" class="descripcion"></p>
+        <p class="precio"><strong>Precio:</strong> S/ <span id="precio-libro"></span></p>
+        <button id="btn-agregar" class="btn-agregar">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/DetalleLibro.js"></script>
+</body>
+</html>
