@@ -1,33 +1,34 @@
-
+/* Reset básico */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
+/* Background & centering */
 body {
+  margin: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f4f9f4;
+  background: linear-gradient(135deg, #e0f7fa, #80deea);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 100vh;
 }
 
-/* Contenedor del login */
+/* Contenedor */
 .login-container {
   background: #ffffff;
   padding: 40px 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 360px;
   text-align: center;
 }
 
+/* Título */
 .login-container h2 {
   margin-bottom: 20px;
-  color: #2e8b57;
+  color: #00796b;
   font-size: 1.8rem;
 }
 
@@ -35,43 +36,186 @@ body {
 #form-login {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+}
+
+/* Grupos */
+.form-group {
+  text-align: left;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #004d40;
 }
 
 /* Inputs */
-#form-login input[type="text"],
-#form-login input[type="password"] {
+#form-login input {
+  width: 100%;
   padding: 12px 15px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #b2dfdb;
   border-radius: 6px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 #form-login input:focus {
   outline: none;
-  border-color: #2e8b57;
+  border-color: #00796b;
+  box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.2);
 }
 
-/* Botón */
-#form-login button {
+/* Wrapper para botón mostrar/ocultar */
+.password-wrapper {
+  position: relative;
+}
+
+#toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #00796b;
+}
+
+/* Botón submit */
+#login-btn {
   padding: 12px;
-  background-color: #2e8b57;
+  background-color: #00796b;
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, opacity 0.3s;
 }
 
-#form-login button:hover {
-  background-color: #27642a;
+#login-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
-/* Mensajes de error (si los necesitas) */
+#login-btn:hover:not(:disabled) {
+  background-color: #004d40;
+}
+
+/* Mensajes de error */
 .error-message {
   color: #c62828;
+  font-size: 0.875rem;
+  min-height: 1em;
+  margin-top: 4px;
+}
+
+/* Link registro */
+.switch-form {
+  margin-top: 20px;
   font-size: 0.9rem;
+}
+
+.switch-form a {
+  color: #00796b;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.switch-form a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Registro: mismo estilo que Login ---------- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #004d40;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #b2dfdb;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #00796b;
+  box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.2);
+}
+
+/* Wrapper para el toggle */
+.password-wrapper {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #00796b;
+}
+
+/* Botón de registro */
+#register-btn {
+  padding: 12px;
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, opacity 0.3s;
+}
+
+#register-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+#register-btn:hover:not(:disabled) {
+  background: linear-gradient(45deg, #ee5a24, #d84315);
+}
+
+/* Switch link */
+.switch-form {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.switch-form a {
+  color: #00796b;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.switch-form a:hover {
+  text-decoration: underline;
 }

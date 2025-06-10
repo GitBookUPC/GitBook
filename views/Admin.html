@@ -10,33 +10,47 @@
   <div class="admin-container">
     <h1>Panel de Administración</h1>
 
-    <form id="form-libro" enctype="multipart/form-data">
+    <form id="form-libro" enctype="multipart/form-data" novalidate>
       <div class="form-group">
-        <label for="titulo">Título:</label>
+        <label for="titulo">Título</label>
         <input type="text" id="titulo" name="titulo" required>
       </div>
 
       <div class="form-group">
-        <label for="precio">Precio (S/):</label>
+        <label for="precio">Precio (S/)</label>
         <input type="number" id="precio" name="precio" step="0.01" required>
       </div>
 
       <div class="form-group">
-        <label for="descripcion">Descripción:</label>
+        <label for="descripcion">Descripción</label>
         <textarea id="descripcion" name="descripcion" rows="4"></textarea>
       </div>
 
       <div class="form-group">
-        <label for="portada">Portada (imagen):</label>
-        <input type="file" id="portada" name="portada" accept="image/*" required>
+        <label for="categoria">Categoría</label>
+        <select id="categoria" name="categoriaID" required>
+          <option value="">— Selecciona categoría —</option>
+        </select>
       </div>
 
-      <button type="submit">Agregar Libro</button>
-    </form>
+      <div class="form-group">
+        <label for="autores">Autores (IDs separados por coma)</label>
+        <input type="text" id="autores" name="autores"
+               placeholder="1,2,3" required>
+      </div>
 
-    <div id="mensaje"></div>
+      <div class="form-group">
+        <label for="portada">Portada (imagen)</label>
+        <input type="file" id="portada" name="portada"
+               accept="image/*" required>
+      </div>
+
+      <button type="submit" id="submit-btn">Agregar Libro</button>
+      <div id="mensaje" class="mensaje"></div>
+    </form>
   </div>
-    <script src="../js/config.js"></script>
+
+  <script src="../js/config.js"></script>
   <script src="../js/Admin.js"></script>
 </body>
 </html>

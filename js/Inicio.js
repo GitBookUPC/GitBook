@@ -1,40 +1,37 @@
-function mostrarDetalle(tipo) {
-  const contenedor = document.getElementById("detalle");
-  let contenido = "";
+document.addEventListener('DOMContentLoaded', () => {
+  // Placeholder rotatorio
+  const searchBox = document.querySelector('.search-box');
+  const texts = [
+    'Busca tu próxima gran lectura...',
+    'Encuentra bestsellers y clásicos...',
+    'Descubre nuevos autores...',
+    'Explora géneros literarios...'
+  ];
+  let idx = 0;
+  setInterval(() => {
+    idx = (idx + 1) % texts.length;
+    searchBox.placeholder = texts[idx];
+  }, 3000);
 
-  switch (tipo) {
-    case "itsm":
-      contenido = `
-        <h3>ITSM y Gestión de Dispositivos</h3>
-        <ul>
-          <li>✔️ CMDB Integrado</li>
-          <li>✔️ Inventario y Parcheo</li>
-          <li>✔️ Gestión remota de equipos</li>
-        </ul>`;
-      break;
+  // Animar tarjetas con IntersectionObserver
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'slideInUp 0.6s ease-out forwards';
+      }
+    });
+  }, { threshold: 0.2 });
 
-    case "esm":
-      contenido = `
-        <h3>Enterprise Service Management</h3>
-        <ul>
-          <li>📌 Servicios Compartidos</li>
-          <li>📌 RRHH y Facilities</li>
-          <li>📌 Integración entre áreas</li>
-        </ul>`;
-      break;
+  document.querySelectorAll('.card').forEach((el, i) => {
+    el.style.opacity = 0;
+    el.style.animationDelay = `${i * 0.2}s`;
+    observer.observe(el);
+  });
 
-    case "clientes":
-      contenido = `
-        <h3>Soporte a Clientes Externos</h3>
-        <p>Automatización de atención al cliente, chatbots y autoservicio para mejorar la experiencia.</p>`;
-      break;
-
-    case "teletrabajo":
-      contenido = `
-        <h3>Teletrabajo y Productividad</h3>
-        <p>Soluciones remotas seguras, colaboración y monitoreo eficiente para entornos híbridos.</p>`;
-      break;
-  }
-
-  contenedor.innerHTML = contenido;
-}
+  // Scroll parallax suave en hero
+  window.addEventListener('scroll', () => {
+    const hero = document.querySelector('.hero-section');
+    const y = window.pageYOffset;
+    if (hero) hero.style.transform = `translateY(${y * 0.3}px)`;
+  });
+});

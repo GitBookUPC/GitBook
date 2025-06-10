@@ -2,18 +2,56 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Iniciar Sesión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar Sesión — GitBook</title>
   <link rel="stylesheet" href="../css/Login.css">
 </head>
 <body>
-  <div class="login-container">
+  <div class="login-container" role="main">
     <h2>Iniciar Sesión</h2>
-    <form id="form-login">
-      <input type="text" name="usuario" placeholder="Usuario" required>
-      <input type="password" name="password" placeholder="Contraseña" required>
-      <button type="submit">Entrar</button>
+    <form id="form-login" novalidate>
+      <!-- Usuario → Email -->
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input id="email"
+               type="email"
+               name="email"
+               class="form-input"
+               placeholder="tú@ejemplo.com"
+               required
+               aria-describedby="email-error">
+        <div id="email-error" class="error-message"></div>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <div class="password-wrapper">
+          <input id="password"
+                 type="password"
+                 name="password"
+                 class="form-input"
+                 placeholder="••••••••"
+                 required
+                 aria-describedby="password-error">
+          <button type="button"
+                  id="toggle-password"
+                  class="password-toggle"
+                  aria-label="Mostrar contraseña">👁️</button>
+        </div>
+        <div id="password-error" class="error-message"></div>
+      </div>
+
+      <!-- Botón y mensaje -->
+      <button id="login-btn" type="submit" class="btn-primary">Entrar</button>
+      <div id="login-error" class="error-message"></div>
     </form>
+
+    <p class="switch-form">
+      ¿No tienes cuenta? <a href="Register.html">Regístrate</a>
+    </p>
   </div>
+
   <script src="../js/config.js"></script>
   <script src="../js/Login.js"></script>
 </body>

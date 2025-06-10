@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>MENÚ PRINCIPAL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitBook</title>
+  <link rel="icon" href="https://gitbookstorage.blob.core.windows.net/portadas-gitbook/logo.png" type="image/png">
   <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="css/Index.css">
@@ -52,14 +54,23 @@
         </a>
         <span class="tooltip">Iniciar sesión</span> 
       </li>
+      <li id="admin-link" style="display: none;">
+        <a href="#" id="admin">
+          <i class='bi bi-shield-lock-fill'></i>
+          <span class="links_name">Administración</span>
+        </a>
+        <span class="tooltip">Administración</span>
+      </li>
       <li class="profile">
         <div class="profile-details">
           <div class="name_job">
-            <div class="name">Sebastián</div>
+            <div class="name">Usuario</div>
             <div class="job">Lector</div>
           </div>
         </div>
-        <i class='bx bx-log-out' id="log_out"></i>
+        <i class='bx bx-log-out' id="log_out">
+          <span class="tooltip">Cerrar sesión</span>
+        </i>
       </li>
     </ul>
   </div>

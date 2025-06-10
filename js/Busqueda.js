@@ -66,4 +66,17 @@ document.getElementById('search-bar').addEventListener('input', function () {
       }
     });
   });
-  
+  // Al final de tu función de búsqueda en Busqueda.js
+async function buscarLibro() {
+  const term = document.getElementById('search-bar').value.trim();
+  // … lógica de filtrar/mostrar libros …
+  // GRABAR HISTORIAL
+  fetch(`${API_BASE}/search-history`, {
+    method: 'POST',
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization':'Bearer '+ getToken()
+    },
+    body: JSON.stringify({ term })
+  }).catch(console.warn);
+}

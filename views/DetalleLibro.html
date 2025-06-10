@@ -6,6 +6,7 @@
   <title>Detalle de Libro - GitBook</title>
   <link rel="stylesheet" href="../css/DetalleLibro.css" />
 </head>
+
 <body>
   <div class="contenedor_general detalle-contenedor">
     <button id="btn-volver" class="btn-volver">← Volver</button>
@@ -23,6 +24,29 @@
       </div>
     </div>
   </div>
+  <!-- Sección de Comentarios -->
+  <section class="comments-section">
+    <h2>Comentarios</h2>
+
+    <!-- Formulario para nuevo comentario -->
+    <form id="form-comment" class="comment-form" novalidate>
+      <textarea id="comment-text" placeholder="Escribe tu comentario..." required></textarea>
+      <div class="rating-wrapper">
+        <label for="comment-rating">Calificación:</label>
+        <select id="comment-rating">
+          <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+          <option value="4">⭐️⭐️⭐️⭐️</option>
+          <option value="3">⭐️⭐️⭐️</option>
+          <option value="2">⭐️⭐️</option>
+          <option value="1">⭐️</option>
+        </select>
+      </div>
+      <button type="submit" id="submit-comment" class="btn-agregar">Enviar comentario</button>
+    </form>
+
+    <!-- Lista de comentarios -->
+    <div id="comments-list" class="comments-list"></div>
+  </section>
 
   <script src="../js/config.js"></script>
   <script src="../js/DetalleLibro.js"></script>

@@ -51,3 +51,17 @@ button[type="submit"]:hover {
   margin-top: 20px;
   font-size: 0.95rem;
 }
+/* Mensajes */
+.mensaje {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  min-height: 1.2em;
+}
+.mensaje.success { color: #2e7d32; }
+.mensaje.error   { color: #c62828; }
+
+/* Deshabilitar botón */
+#submit-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

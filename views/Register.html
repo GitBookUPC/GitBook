@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro — GitBook</title>
+  <link rel="stylesheet" href="../css/Login.css">
+</head>
+<body>
+  <div class="login-container" role="main">
+    <h2>Crea tu cuenta</h2>
+    <form id="form-register" class="form" novalidate>
+
+      <div class="form-group">
+        <label for="reg-nombre">Usuario</label>
+        <input id="reg-nombre" type="text" name="nombre"
+               class="form-input"
+               placeholder="Tu nombre de usuario" required
+               aria-describedby="nombre-error">
+        <div id="nombre-error" class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-email">Correo electrónico</label>
+        <input id="reg-email" type="email" name="email"
+               class="form-input"
+               placeholder="tú@ejemplo.com" required
+               aria-describedby="email-error">
+        <div id="email-error" class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-password">Contraseña</label>
+        <div class="password-wrapper">
+          <input id="reg-password" type="password" name="password"
+                 class="form-input"
+                 placeholder="••••••••" required
+                 aria-describedby="password-error">
+          <button type="button" id="toggle-password-register"
+                  class="password-toggle"
+                  aria-label="Mostrar contraseña">👁️</button>
+        </div>
+        <div id="password-error" class="error-message"></div>
+      </div>
+
+      <button type="submit" id="register-btn" class="btn-primary">Registrarme</button>
+      <div id="register-error" class="error-message"></div>
+    </form>
+
+    <p class="switch-form">
+      ¿Ya tienes cuenta? <a href="Login.html">Inicia sesión</a>
+    </p>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/Register.js"></script>
+</body>
+</html>

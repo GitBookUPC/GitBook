@@ -17,7 +17,7 @@ async function cargarCategorias() {
   } catch (err) {
     console.error('❌ Error cargando categorías:', err);
     document.getElementById('lista-categorias')
-      .innerHTML = `<li style="color:red;">Error al cargar categorías</li>`;
+      .innerHTML = `<li style x|="color:red;">Error al cargar categorías</li>`;
   }
 }
 
