@@ -7,34 +7,64 @@
   <link rel="stylesheet" href="../css/Categorias.css" />
 </head>
 <body>
-  <div class="contenedor_general">
-    <div class="contenedor_bienvenido">
-      <h1>Categorías</h1>
-      <p>Selecciona una categoría para ver los libros disponibles.</p>
+  <!-- Header principal -->
+  <header class="header-principal">
+    <div class="contenedor-header">
+      <h1 class="titulo-principal">Categorías de Libros</h1>
+      <p class="subtitulo">Descubre nuestra colección organizada por categorías</p>
     </div>
+  </header>
 
-    <div class="contenedor-categorias">
-      <ul id="lista-categorias"></ul>
-    </div>
+  <!-- Contenedor principal -->
+  <main class="contenedor-principal">
+    
+    <!-- Sección de categorías -->
+    <section class="seccion-categorias">
+      <h2 class="titulo-seccion">Explorar por Categoría</h2>
+      <nav class="navegacion-categorias">
+        <ul id="lista-categorias" class="lista-categorias">
+          <!-- Las categorías se cargarán dinámicamente -->
+        </ul>
+      </nav>
+    </section>
 
-    <div class="contenedor-libros">
-      <div id="lista-libros" class="noticias"></div>
-    </div>
-  </div>
-  <!-- Modal de detalle -->
-  <div id="modal-detalle" class="modal">
-    <div class="modal-content">
-      <span id="cerrar-modal" class="close">&times;</span>
-      <img id="detalle-imagen" src="" alt="Portada" />
-      <h2 id="detalle-titulo"></h2>
-      <p id="detalle-descripcion"></p>
-      <p><strong>Precio:</strong> S/ <span id="detalle-precio"></span></p>
-      <p><strong>Categoría:</strong> <span id="detalle-categoria"></span></p>
-      <p><strong>Autores:</strong> <span id="detalle-autores"></span></p>
-      <button id="btn-agregar-detalle">Agregar al carrito</button>
-    </div>
-  </div>
+    <!-- Sección de libros -->
+    <section class="seccion-libros">
+      <div class="contenedor-libros-header">
+        <h2 id="titulo-categoria-actual" class="titulo-categoria-actual">Todos los Libros</h2>
+        <div class="contador-libros">
+          <span id="contador-resultados" class="contador-resultados"></span>
+        </div>
+      </div>
+      
+      <!-- Contenedor de libros con grid responsive -->
+      <div id="contenedor-libros" class="contenedor-libros-grid">
+        <div id="lista-libros" class="grid-libros">
+          <!-- Los libros se cargarán dinámicamente aquí -->
+        </div>
+        
+        <!-- Estado de carga -->
+        <div id="estado-carga" class="estado-carga hidden">
+          <div class="spinner"></div>
+          <p>Cargando libros...</p>
+        </div>
+        
+        <!-- Estado vacío -->
+        <div id="estado-vacio" class="estado-vacio hidden">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+          <h3>No se encontraron libros</h3>
+          <p>No hay libros disponibles en esta categoría</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
+
+
+  <!-- Scripts -->
   <script src="../js/config.js"></script>
   <script src="../js/Categorias.js"></script>
 </body>

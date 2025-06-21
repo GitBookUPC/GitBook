@@ -1,34 +1,71 @@
-
+<!-- views/Carrito.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Carrito - GitBook</title>
-  <link rel="stylesheet" href="../css/Busqueda.css" />
+  <link rel="stylesheet" href="../css/Carrito.css" />
 </head>
 <body>
-  <div class="contenedor_general">
-    <div class="contenedor_bienvenido">
-      <h1>TU CARRITO DE COMPRAS</h1>
-      <p>Revisa los libros que has seleccionado y procede con el pago.</p>
-    </div>
-
-    <div class="contenedor-noticias">
-      <h2 class="titulo">📚 Libros Seleccionados</h2>
-      <div id="lista-carrito" class="noticias"></div>
-    </div>
-
-    <div class="contenedor-promociones">
-      <h2 class="titulo">💳 Resumen y Pago</h2>
-      <div id="resumen-compra">
+  <div class="cart-container">
+    <h1>🛒 Tu Carrito de Compras</h1>
+    <div class="cart-main">
+      <section class="cart-items">
+        <h2>Libros Seleccionados</h2>
+        <div id="lista-carrito" class="cart-list"></div>
+        <div id="empty-cart" class="empty-cart" hidden>
+          <p>No hay libros en el carrito.</p>
+          <a href="/views/Categorias.html" class="btn btn-secondary">
+            Seguir comprando
+          </a>
+        </div>
+      </section>
+      <aside class="cart-summary">
+        <h2>Resumen</h2>
         <p><strong>Total:</strong> S/ <span id="total">0.00</span></p>
-        <button onclick="pagar()" style="padding: 10px 20px; background-color: #2e7d32; color: white; border: none; border-radius: 5px; font-weight: bold;">Pagar ahora</button>
-      </div>
+        <button id="btn-pay" class="btn btn-primary">Pagar Ahora</button>
+      </aside>
     </div>
   </div>
 
-  <footer>© 2025 GitBook. Todos los derechos reservados.</footer>
+  <!-- Modal de Confirmación de Compra -->
+  <div id="checkout-modal" class="modal" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <header>
+        <h3>Confirmar Compra</h3>
+        <button id="btn-close-modal" class="close">&times;</button>
+      </header>
+      <form id="form-checkout">
+        <div class="field">
+          <label for="select-direccion">Dirección de envío</label>
+          <select id="select-direccion" required>
+            <option value="">— Selecciona dirección —</option>
+          </select>
+          <button type="button" id="btn-new-direccion" class="small-btn">+ Nueva dirección</button>
+        </div>
+        <div id="new-direccion-form" class="field" hidden>
+          <input type="text" id="dir-calle"       placeholder="Calle y número">
+          <input type="text" id="dir-ciudad"      placeholder="Ciudad">
+          <input type="text" id="dir-codpostal"   placeholder="Código postal">
+          <button type="button" id="btn-save-dir" class="small-btn">Guardar dirección</button>
+        </div>
+        <div class="field">
+          <label for="select-metodo">Método de pago</label>
+          <select id="select-metodo" required>
+            <option value="">— Selecciona método —</option>
+          </select>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Confirmar y pagar</button>
+          <button type="button" id="btn-cancel-modal" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 1º config, 2º Carrito logic -->
   <script src="../js/config.js"></script>
   <script src="../js/Carrito.js"></script>
 </body>

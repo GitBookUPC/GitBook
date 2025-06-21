@@ -5,48 +5,189 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Detalle de Libro - GitBook</title>
   <link rel="stylesheet" href="../css/DetalleLibro.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
+  <!-- Loading overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Cargando...</p>
+  </div>
+
   <div class="contenedor_general detalle-contenedor">
-    <button id="btn-volver" class="btn-volver">← Volver</button>
+    <!-- Header con botón volver -->
+    <header class="detalle-header">
+      <button id="btn-volver" class="btn-volver">
+        <i class="fas fa-arrow-left"></i>
+        <span>Volver</span>
+      </button>
+      <div class="breadcrumb">
+        <span>Inicio</span> <i class="fas fa-chevron-right"></i> 
+        <span>Categorías</span> <i class="fas fa-chevron-right"></i> 
+        <span id="breadcrumb-categoria">Libro</span>
+      </div>
+    </header>
+
+    <!-- Contenido principal del libro -->
     <div class="detalle-grid">
       <div class="detalle-imagen">
-        <img id="img-portada" src="" alt="Portada" />
+        <div class="imagen-container">
+          <img id="img-portada" src="" alt="Portada" class="libro-imagen" />
+          <div class="imagen-overlay">
+            <button class="btn-zoom" title="Ver imagen completa">
+              <i class="fas fa-expand"></i>
+            </button>
+          </div>
+        </div>
       </div>
+
       <div class="detalle-info">
-        <h1 id="titulo-libro"></h1>
-        <p id="categoria-libro" class="categoria-badge"></p>
-        <p id="autores-libro" class="autores"></p>
-        <p id="descripcion-libro" class="descripcion"></p>
-        <p class="precio"><strong>Precio:</strong> S/ <span id="precio-libro"></span></p>
-        <button id="btn-agregar" class="btn-agregar">Agregar al carrito</button>
+        <div class="libro-header">
+          <h1 id="titulo-libro" class="titulo-principal"></h1>
+          <div class="libro-meta">
+            <span id="categoria-libro" class="categoria-badge"></span>
+            <div class="rating-display">
+              <div class="stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+              </div>
+              <span class="rating-text">(4.2/5)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="autor-info">
+          <i class="fas fa-user-edit"></i>
+          <p id="autores-libro" class="autores"></p>
+        </div>
+
+        <div class="descripcion-container">
+          <h3><i class="fas fa-book-open"></i> Descripción</h3>
+          <p id="descripcion-libro" class="descripcion"></p>
+        </div>
+
+        <div class="precio-container">
+          <div class="precio-info">
+            <span class="precio-label">Precio:</span>
+            <span class="precio-valor">S/ <span id="precio-libro"></span></span>
+          </div>
+          <div class="stock-info">
+            <i class="fas fa-check-circle"></i>
+            <span>Disponible</span>
+          </div>
+        </div>
+
+        <div class="acciones-container">
+          <button id="btn-agregar" class="btn-agregar">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Agregar al carrito</span>
+            <div class="btn-loading">
+              <i class="fas fa-spinner fa-spin"></i>
+            </div>
+          </button>
+          <button class="btn-favorito" title="Agregar a favoritos">
+            <i class="far fa-heart"></i>
+          </button>
+          <button class="btn-compartir" title="Compartir libro">
+            <i class="fas fa-share-alt"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
+
   <!-- Sección de Comentarios -->
   <section class="comments-section">
-    <h2>Comentarios</h2>
-
-    <!-- Formulario para nuevo comentario -->
-    <form id="form-comment" class="comment-form" novalidate>
-      <textarea id="comment-text" placeholder="Escribe tu comentario..." required></textarea>
-      <div class="rating-wrapper">
-        <label for="comment-rating">Calificación:</label>
-        <select id="comment-rating">
-          <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
-          <option value="4">⭐️⭐️⭐️⭐️</option>
-          <option value="3">⭐️⭐️⭐️</option>
-          <option value="2">⭐️⭐️</option>
-          <option value="1">⭐️</option>
-        </select>
+    <div class="comments-container">
+      <div class="comments-header">
+        <h2><i class="fas fa-comments"></i> Reseñas y Comentarios</h2>
+        <div class="comments-stats">
+          <span id="total-comments">0 comentarios</span>
+        </div>
       </div>
-      <button type="submit" id="submit-comment" class="btn-agregar">Enviar comentario</button>
-    </form>
 
-    <!-- Lista de comentarios -->
-    <div id="comments-list" class="comments-list"></div>
+      <!-- Formulario para nuevo comentario -->
+      <div class="comment-form-container">
+        <h3><i class="fas fa-pen"></i> Escribe tu reseña</h3>
+        <form id="form-comment" class="comment-form" novalidate>
+          <div class="form-group">
+            <label for="comment-rating" class="rating-label">
+              <i class="fas fa-star"></i> Tu calificación:
+            </label>
+            <div class="rating-input">
+              <select id="comment-rating">
+                <option value="5">⭐⭐⭐⭐⭐ (5 estrellas)</option>
+                <option value="4">⭐⭐⭐⭐ (4 estrellas)</option>
+                <option value="3">⭐⭐⭐ (3 estrellas)</option>
+                <option value="2">⭐⭐ (2 estrellas)</option>
+                <option value="1">⭐ (1 estrella)</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="comment-text">
+              <i class="fas fa-comment-alt"></i> Tu comentario:
+            </label>
+            <textarea 
+              id="comment-text" 
+              placeholder="Comparte tu opinión sobre este libro. ¿Qué te pareció la historia, los personajes, el estilo de escritura...?" 
+              required
+              maxlength="500"
+            ></textarea>
+            <div class="char-counter">
+              <span id="char-count">0</span>/500 caracteres
+            </div>
+          </div>
+          
+          <button type="submit" id="submit-comment" class="btn-enviar-comment">
+            <i class="fas fa-paper-plane"></i>
+            <span>Publicar reseña</span>
+            <div class="btn-loading">
+              <i class="fas fa-spinner fa-spin"></i>
+            </div>
+          </button>
+        </form>
+      </div>
+
+      <!-- Lista de comentarios -->
+      <div class="comments-list-container">
+        <div class="comments-filter">
+          <button class="filter-btn active" data-filter="all">
+            <i class="fas fa-list"></i> Todos
+          </button>
+          <button class="filter-btn" data-filter="recent">
+            <i class="fas fa-clock"></i> Recientes
+          </button>
+          <button class="filter-btn" data-filter="helpful">
+            <i class="fas fa-thumbs-up"></i> Más útiles
+          </button>
+        </div>
+        <div id="comments-list" class="comments-list"></div>
+      </div>
+    </div>
   </section>
+
+  <!-- Modal para imagen ampliada -->
+  <div id="image-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img id="modal-image" src="" alt="Imagen ampliada">
+    </div>
+  </div>
+
+  <!-- Modal / Toast -->
+<div id="cart-toast" class="cart-toast hidden">
+  <p>✅ Libro añadido al carrito</p>
+  <div class="cart-toast__actions">
+    <button id="btn-go-cart" class="btn btn-secondary">Ir al carrito</button>
+    <button id="btn-continue" class="btn btn-primary">Seguir comprando</button>
+  </div>
+</div>
+
+
+  <!-- Toast notifications -->
+  <div id="toast-container" class="toast-container"></div>
 
   <script src="../js/config.js"></script>
   <script src="../js/DetalleLibro.js"></script>

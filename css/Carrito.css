@@ -1,0 +1,201 @@
+/* Carrito.css */
+.modal[hidden] {
+  display: none !important;
+}
+/* ─── Layout general ───────────────────────────────────────── */
+.cart-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+  font-family: sans-serif;
+  color: #333;
+}
+.cart-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .cart-main { grid-template-columns: 1fr; }
+}
+
+/* ─── Cart Items & Summary ────────────────────────────────── */
+.cart-items, .cart-summary {
+  background: #fff;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.cart-items h2, .cart-summary h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+/* ─── Tarjetas de libro ──────────────────────────────────── */
+.cart-list .cart-card {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+}
+.cart-card img {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.cart-card .info {
+  flex: 1;
+}
+.cart-card .info h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+.cart-card .info p {
+  margin: 4px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+.cart-card .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+.cart-card .actions input {
+  width: 50px;
+  text-align: center;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.btn-remove {
+  background: #c62828;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.btn-remove:hover {
+  background: #b71c1c;
+}
+
+/* ─── Botones genéricos ──────────────────────────────────── */
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+}
+.btn-primary {
+  background: #2e7d32;
+  color: #fff;
+}
+.btn-primary:disabled {
+  background: #A5D6A7;
+  cursor: not-allowed;
+}
+.btn-secondary {
+  background: #ccc;
+  color: #333;
+}
+.small-btn {
+  background: #f0f0f0;
+  color: #333;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+.small-btn:hover {
+  background: #e0e0e0;
+}
+
+/* ─── Empty cart ─────────────────────────────────────────── */
+.empty-cart {
+  text-align: center;
+  padding: 20px;
+}
+.empty-cart p {
+  margin-bottom: 12px;
+  color: #666;
+}
+
+/* ─── Modal de checkout ──────────────────────────────────── */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+}
+.modal-dialog {
+  position: relative;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 450px;
+  padding: 16px 24px 24px;
+  z-index: 1001;
+  animation: fadeIn 0.2s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.modal-dialog header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-dialog header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.modal-dialog .close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.modal-dialog .field {
+  margin-top: 12px;
+}
+.modal-dialog .field label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+.modal-dialog .field select,
+.modal-dialog .field input {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.modal-dialog .field input {
+  margin-bottom: 8px;
+}
+.modal-dialog .actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

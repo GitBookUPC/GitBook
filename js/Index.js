@@ -26,9 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('categorias').addEventListener('click', () => {
     frame.src = 'views/Categorias.html';
   });
-  document.getElementById('busqueda').addEventListener('click', () => {
-    frame.src = 'views/Busqueda.html';
-  });
+  
   document.getElementById('carrito').addEventListener('click', () => {
     frame.src = 'views/Carrito.html';
   });
