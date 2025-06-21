@@ -43,8 +43,9 @@ jobs:
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "." # Built app content directory - optional
+          skip_app_build: true          # ¡salta el `npm run build`
           github_id_token: ${{ steps.idtoken.outputs.result }}
-          app_build_command:           "npm run build"
+      
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
