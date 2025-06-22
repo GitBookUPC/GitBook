@@ -1,0 +1,130 @@
+/* Estructura general */
+.perfil-dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  color: #333;
+}
+
+/* Banner */
+.banner {
+  position: relative;
+  width: 100%; height: 200px;
+  overflow: hidden;
+  background: #eee;
+}
+.banner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.btn-edit-banner {
+  position: absolute;
+  bottom: 10px; right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: #fff; padding: 6px 10px; border-radius: 4px;
+  cursor: pointer; font-size: 0.9rem;
+}
+
+/* Header: avatar + nombre */
+.header {
+  display: flex;
+  align-items: center;
+  margin-top: -75px;
+  padding: 0 20px;
+}
+.avatar-wrap {
+  position: relative;
+  width: 150px; height: 150px;
+}
+.avatar-wrap img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  object-fit: cover;
+  background: #ccc;
+}
+.btn-edit-avatar {
+  position: absolute; bottom: 0; right: 0;
+  background: #2e7d32; color: #fff;
+  padding: 4px; border-radius: 50%; cursor: pointer;
+}
+.user-info {
+  margin-left: 20px;
+}
+.user-info h2 {
+  margin: 0; font-size: 1.8rem;
+}
+.user-info .alias {
+  margin: 4px 0 0; color: #666;
+}
+
+/* Métricas */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+  gap: 16px;
+  padding: 20px;
+}
+.metric {
+  background: #fff;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.metric .value {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.metric .label {
+  margin-top: 4px;
+  color: #555;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid #eee;
+  padding: 0 20px;
+}
+.tabs button {
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #555;
+}
+.tabs button.active {
+  border-bottom: 3px solid #2e7d32;
+  color: #2e7d32;
+}
+
+/* Contenido */
+.tab-content {
+  padding: 20px;
+  background: #fff;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+}
+
+/* Form Configuración */
+#perfil-config-form .form-group {
+  margin-bottom: 16px;
+}
+#perfil-config-form label { display:block; margin-bottom:4px; font-weight:bold; }
+#perfil-config-form input {
+  width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;
+  font-size:1rem;
+}
+.btn-save {
+  background:#2e7d32; color:#fff; border:none; padding:8px 12px;
+  border-radius:4px; cursor:pointer;
+}
+.message {
+  margin-top:12px; font-size:0.95rem;
+}
+.message.success { color:#2e7d32; }
+.message.error   { color:#c62828; }

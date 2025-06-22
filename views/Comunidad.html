@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comunidad — GitBook</title>
+  <link rel="stylesheet" href="../css/Comunidad.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+  <div class="comunidad-container">
+    <h1>🗣️ Comunidad</h1>
+
+    <!-- Formulario para nuevo post -->
+    <form id="post-form" class="post-form">
+      <textarea id="post-text" placeholder="¿Qué quieres compartir hoy?" required></textarea>
+      <div class="form-actions">
+        <label for="post-image" class="btn-image">
+          <i class="bi bi-camera-fill"></i> Foto
+        </label>
+        <input type="file" id="post-image" accept="image/*" hidden>
+        <button type="submit" class="btn-post">Publicar</button>
+      </div>
+      <img id="image-preview" class="image-preview" hidden alt="Vista previa">
+    </form>
+
+    <!-- Feed de posts -->
+    <div id="feed" class="feed">
+      <p class="loading">Cargando publicaciones…</p>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/Comunidad.js"></script>
+</body>
+</html>

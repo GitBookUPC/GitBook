@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GitBook</title>
   <link rel="icon" href="https://gitbookstorage.blob.core.windows.net/portadas-gitbook/logo.png" type="image/png">
   <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
@@ -18,43 +18,58 @@
       <i class='bx bx-menu' id="btn"></i>
     </div>
     <ul class="nav-list">
+
       <li>
         <a id="inicio" href="#">
           <i class='bi bi-house-door-fill'></i>
           <span class="links_name">Inicio</span>
         </a>
-
         <span class="tooltip">Inicio</span>
       </li>
+
       <li>
-        <a href="#" id="categorias">
+        <a id="categorias" href="#">
           <i class='bi bi-book-fill'></i>
           <span class="links_name">Categorías</span>
         </a>
         <span class="tooltip">Categorías</span>
       </li>
-      
+
       <li>
-        <a href="#" id="carrito">
+        <a id="carrito" href="#">
           <i class='bi bi-cart4'></i>
           <span class="links_name">Carrito</span>
         </a>
         <span class="tooltip">Carrito</span>
       </li>
-       <li>
-        <a href="#" id="login">
+
+      <li id="account">
+        <a id="account-link" href="#">
           <i class='bi bi-person-fill'></i>
           <span class="links_name">Iniciar sesión</span>
         </a>
-        <span class="tooltip">Iniciar sesión</span> 
+        <span class="tooltip">Iniciar sesión</span>
       </li>
+
+      <!-- Solo admins lo verán, Index.js lo oculta/muestra -->
       <li id="admin-link" style="display: none;">
-        <a href="#" id="admin">
+        <a id="admin" href="#">
           <i class='bi bi-shield-lock-fill'></i>
           <span class="links_name">Administración</span>
         </a>
         <span class="tooltip">Administración</span>
       </li>
+       <!-- Nuevo: Comunidad -->
+      <li id="comunidad">
+        <a id="comunidad" href="#">
+          <i class='bi bi-people-fill'></i>
+          <span class="links_name">Comunidad en Linea</span>
+        </a>
+        <span class="tooltip">Comunidad en Linea</span>
+      </li>
+
+
+      <!-- Perfil y Logout: siempre en el fondo -->
       <li class="profile">
         <div class="profile-details">
           <div class="name_job">
@@ -66,13 +81,20 @@
           <span class="tooltip">Cerrar sesión</span>
         </i>
       </li>
+
     </ul>
   </div>
 
   <!-- Main Content -->
   <section class="home-section">
-    <iframe id="content-frame" src="" width="100%" height="100%" style="border: none;"></iframe>
+    <iframe id="content-frame"
+            src=""
+            width="100%"
+            height="100%"
+            style="border: none;">
+    </iframe>
   </section>
+
   <script src="js/config.js"></script>
   <script src="js/Index.js"></script>
 </body>
