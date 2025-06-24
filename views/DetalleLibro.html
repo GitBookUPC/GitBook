@@ -51,7 +51,7 @@
               <div class="stars">
                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
               </div>
-              <span class="rating-text">(4.2/5)</span>
+              <span class="rating-text">(0/5)</span>
             </div>
           </div>
         </div>
@@ -150,7 +150,7 @@
         </form>
       </div>
 
-      <!-- Lista de comentarios -->
+      <!-- Lista de comentarios (aquí inyecta JS) -->
       <div class="comments-list-container">
         <div class="comments-filter">
           <button class="filter-btn active" data-filter="all">
@@ -177,14 +177,13 @@
   </div>
 
   <!-- Modal / Toast -->
-<div id="cart-toast" class="cart-toast hidden">
-  <p>✅ Libro añadido al carrito</p>
-  <div class="cart-toast__actions">
-    <button id="btn-go-cart" class="btn btn-secondary">Ir al carrito</button>
-    <button id="btn-continue" class="btn btn-primary">Seguir comprando</button>
+  <div id="cart-toast" class="cart-toast hidden">
+    <p>✅ Libro añadido al carrito</p>
+    <div class="cart-toast__actions">
+      <button id="btn-go-cart" class="btn btn-secondary">Ir al carrito</button>
+      <button id="btn-continue" class="btn btn-primary">Seguir comprando</button>
+    </div>
   </div>
-</div>
-
 
   <!-- Toast notifications -->
   <div id="toast-container" class="toast-container"></div>

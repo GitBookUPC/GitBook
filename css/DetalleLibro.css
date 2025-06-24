@@ -1209,3 +1209,80 @@ body {
 }
 
 
+/* ============================== */
+/* Replies anidadas               */
+/* ============================== */
+.replies-container {
+  margin-top: 15px;
+  margin-left: 2rem;
+  border-left: 2px solid var(--border-color);
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ============================== */
+/* Formulario de respuesta        */
+/* ============================== */
+.reply-form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reply-form.hidden {
+  display: none;
+}
+
+.reply-form textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.reply-form textarea:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.reply-form button {
+  align-self: flex-start;
+  padding: 8px 16px;
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.reply-form button[type="button"] {
+  background: var(--accent-color);
+}
+
+.reply-form button:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* ============================== */
+/* Ajustes responsive para replies*/
+/* ============================== */
+@media (max-width: 768px) {
+  .replies-container {
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+  }
+  .reply-form textarea {
+    min-height: 60px;
+  }
+}
