@@ -1,92 +1,182 @@
-// public/js/PerfilDashboard.js
-(async function(){
-  const token = localStorage.getItem('token');
-  if (!token) return location.href = 'Login.html?redirect=Perfil.html';
-  const headers = { 'Authorization':'Bearer '+token };
+// public/js/Perfil.js
 
-  // Elementos
-  const avatarInput = document.getElementById('avatar-input');
-  const bannerInput = document.getElementById('banner-input');
-  const avatarImg   = document.getElementById('avatar-img');
-  const bannerImg   = document.getElementById('banner-img');
-  const nameH2      = document.getElementById('user-name');
-  const aliasP      = document.getElementById('user-alias');
+// ─── 0) Helpers ────────────────────────────────────────────────────────────
+function getToken() {
+  return localStorage.getItem('token');
+}
+async function fetchJSON(url, opts = {}) {
+  const res = await fetch(url, {
+    ...opts,
+    headers: {
+      ...(opts.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
+      ...(opts.headers || {}),
+    },
+  });
+  if (!res.ok) throw new Error((await res.json()).error || res.statusText);
+  return res.json();
+}
 
-  const mPub        = document.getElementById('m-publicaciones');
-  const mComp       = document.getElementById('m-compras');
-  const mRes        = document.getElementById('m-reseñas');
-  const mFav        = document.getElementById('m-favoritos');
+// ─── 1) Elementos del DOM ─────────────────────────────────────────────────
+const bannerImg       = document.getElementById('banner-img');
+const bannerInput     = document.getElementById('banner-input');
+const avatarImg       = document.getElementById('avatar-img');
+const avatarInput     = document.getElementById('avatar-input');
+const userNameEl      = document.getElementById('user-name');
+const userAliasEl     = document.getElementById('user-alias');
+const mCompras        = document.getElementById('m-compras');
+const mResenas        = document.getElementById('m-reseñas');
+const mFavoritos      = document.getElementById('m-favoritos');
+const comprasListEl   = document.getElementById('compras-list');
+const resenasListEl   = document.getElementById('resenas-list');
+const favoritosListEl = document.getElementById('favoritos-list');
 
-  const tabs        = document.querySelectorAll('.tabs button');
-  const sections    = document.querySelectorAll('.tab-content');
+// ─── 2) Inicialización ────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  setupTabs();
+  await loadUserInfo();
+  await loadMetrics();
+  await loadCompras();
+  loadResenas();
+  loadFavoritos();
+});
 
-  // 1) Cargar perfil básico
-  let user;
+// ─── 3) Perfil básico: nombre, alias, banner y avatar ──────────────────────
+async function loadUserInfo() {
   try {
-    const res = await fetch(`${API_BASE}/usuarios/me`, { headers });
-    if (!res.ok) throw new Error();
-    user = await res.json();
-    avatarImg.src = user.AvatarURL;
-    bannerImg.src = user.BannerURL;
-    nameH2.textContent = user.NombreUsuario;
-    aliasP.textContent = '@'+user.NombreUsuario.toLowerCase().replace(/\s+/g,'_');
-  } catch {
-    console.error('No se pudo cargar perfil');
+    const me = await fetchJSON(`${API_BASE}/auth/me`, {
+      headers: { 'Authorization': 'Bearer ' + getToken() }
+    });
+
+    userNameEl.textContent  = me.nombre;
+    userAliasEl.textContent = '@' + me.nombre;
+
+    bannerImg.src = me.bannerUrl || '/images/default-banner.jpg';
+    avatarImg.src = me.avatarUrl || '/images/default-avatar.png';
+
+    setupImageUpload(bannerInput, bannerImg, 'banner');
+    setupImageUpload(avatarInput, avatarImg, 'avatar');
+  } catch (err) {
+    console.error('Error cargando perfil:', err);
   }
+}
 
-  // 2) Cargar métricas
+// ─── 4) Subida de banner/avatar ────────────────────────────────────────────
+function setupImageUpload(inputEl, imgEl, type) {
+  inputEl.onchange = async () => {
+    const file = inputEl.files[0];
+    if (!file) return;
+    const form = new FormData();
+    form.append('file', file);
+
+    const res = await fetch(`${API_BASE}/auth/${type}`, {
+      method: 'PATCH',
+      headers: { 'Authorization': 'Bearer ' + getToken() },
+      body: form
+    });
+    const { imageUrl } = await res.json();
+    imgEl.src = imageUrl;
+  };
+}
+
+// ─── 5) Métricas globales ─────────────────────────────────────────────────
+async function loadMetrics() {
   try {
-    const [ r1, r2, r3 ] = await Promise.all([
-      fetch(`${API_BASE}/api/comunidad/posts/mios`, { headers }), // adapta ruta
-      fetch(`${API_BASE}/api/pedidos`, { headers }),
-      fetch(`${API_BASE}/api/reseñas/mias`, { headers })         // adapta ruta
+    const [pedidos, resenas, favs] = await Promise.all([
+      fetchJSON(`${API_BASE}/pedidos`,   { headers:{ 'Authorization':'Bearer '+getToken() } }),
+      fetchJSON(`${API_BASE}/reviews`,   { headers:{ 'Authorization':'Bearer '+getToken() } }),
+      fetchJSON(`${API_BASE}/favorites`, { headers:{ 'Authorization':'Bearer '+getToken() } })
     ]);
-    const [ posts, pedidos, resenas ] = await Promise.all(r1.json(), r2.json(), r3.json());
-    mPub.textContent  = Array.isArray(posts)? posts.length : 0;
-    mComp.textContent = Array.isArray(pedidos)? pedidos.length : 0;
-    mRes.textContent  = Array.isArray(resenas)? resenas.length : 0;
-    mFav.textContent  = '–'; // si tienes favoritos, llénalo aquí
-  } catch(e){
-    console.warn('Error cargando métricas', e);
+    mCompras.textContent   = pedidos.length;
+    mResenas.textContent   = resenas.length;
+    mFavoritos.textContent = favs.length;
+  } catch (err) {
+    console.error('Error cargando métricas:', err);
   }
+}
 
-  // 3) Manejar pestañas
-  tabs.forEach(btn => {
+// ─── 6) Pestañas ───────────────────────────────────────────────────────────
+function setupTabs() {
+  document.querySelectorAll('.tabs button').forEach(btn => {
     btn.addEventListener('click', () => {
-      tabs.forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
-      sections.forEach(s=>s.hidden = true);
-      document.getElementById('tab-'+btn.dataset.tab).hidden = false;
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.tab-content').forEach(sec => sec.hidden = true);
+      document.getElementById('tab-' + tab).hidden = false;
     });
   });
+}
 
-  // 4) Configuración → actualizar perfil
-  document.getElementById('perfil-config-form').addEventListener('submit', async e => {
-    e.preventDefault();
-    const fd = new FormData();
-    fd.append('NombreUsuario', document.getElementById('cfg-nombre').value);
-    fd.append('Email', document.getElementById('cfg-email').value);
-    if (avatarInput.files[0]) fd.append('avatar', avatarInput.files[0]);
-    if (bannerInput.files[0]) fd.append('banner', bannerInput.files[0]);
-
-    const cfgMsg = document.getElementById('cfg-message');
-    cfgMsg.textContent = '';
-    try {
-      const res = await fetch(`${API_BASE}/usuarios/me`, {
-        method:'PUT',
-        headers,
-        body: fd
-      });
-      if (!res.ok) throw new Error('Error actualizando');
-      cfgMsg.textContent = '¡Perfil actualizado!';
-      cfgMsg.className = 'message success';
-      // refrescar avatar/banner
-      const data = await res.json();
-      // (tu PUT no devuelve URLs, así que recarga todo perfil)
-      location.reload();
-    } catch(err){
-      cfgMsg.textContent = err.message;
-      cfgMsg.className = 'message error';
+// ─── 7) Compras ─────────────────────────────────────────────────────────────
+async function loadCompras() {
+  comprasListEl.textContent = 'Cargando compras…';
+  try {
+    const pedidos = await fetchJSON(`${API_BASE}/pedidos`, {
+      headers: { 'Authorization':'Bearer '+getToken() }
+    });
+    mCompras.textContent = pedidos.length;
+    if (!pedidos.length) {
+      comprasListEl.innerHTML = '<p>No tienes compras aún.</p>';
+      return;
     }
-  });
-})();
+    comprasListEl.innerHTML = pedidos.map(p => `
+      <div class="compra-item">
+        <a href="${API_BASE.replace(/\/api\/?$/,'')}/api/pedidos/${p.pedidoID}/factura.pdf"
+           target="_blank">
+          Pedido #${p.pedidoID}
+        </a>
+        <span>${new Date(p.fecha).toLocaleDateString()}</span>
+        <strong>S/ ${p.total.toFixed(2)}</strong>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.error('Error al cargar compras:', err);
+    comprasListEl.textContent = 'Error al cargar compras';
+  }
+}
+
+// ─── 8) Reseñas ────────────────────────────────────────────────────────────
+async function loadResenas() {
+  resenasListEl.textContent = 'Cargando reseñas…';
+  try {
+    const resenas = await fetchJSON(`${API_BASE}/reviews`, {
+      headers:{ 'Authorization':'Bearer '+getToken() }
+    });
+    if (!resenas.length) {
+      resenasListEl.innerHTML = '<p>No has escrito reseñas.</p>';
+      return;
+    }
+    resenasListEl.innerHTML = resenas.map(r =>
+      `<div class="reseña-item">
+         <strong>${r.libroTitulo}</strong> — ${r.calificacion}/5<br>
+         <em>${r.texto}</em>
+       </div>`
+    ).join('');
+  } catch (err) {
+    console.error('Error cargando reseñas:', err);
+    resenasListEl.textContent = 'Error al cargar reseñas';
+  }
+}
+
+// ─── 9) Favoritos ──────────────────────────────────────────────────────────
+async function loadFavoritos() {
+  favoritosListEl.innerHTML = '<p>Cargando favoritos…</p>';
+  try {
+    const favs = await fetchJSON(`${API_BASE}/favorites`, {
+      headers:{ 'Authorization':'Bearer '+getToken() }
+    });
+    mFavoritos.textContent = favs.length;
+    if (!favs.length) {
+      favoritosListEl.innerHTML = '<p>No tienes favoritos aún.</p>';
+      return;
+    }
+    favoritosListEl.innerHTML = favs.map(f => `
+      <a href="DetalleLibro.html?libroID=${f.libroId}" class="fav-item">
+        ${f.libroTitulo}
+      </a>
+    `).join('');
+  } catch (err) {
+    console.error('Error al cargar favoritos:', err);
+    favoritosListEl.innerHTML = '<p>Error al cargar favoritos</p>';
+  }
+}

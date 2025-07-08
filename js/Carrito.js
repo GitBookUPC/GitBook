@@ -5,6 +5,32 @@ function getToken() {
   return localStorage.getItem('token');
 }
 
+// 0.1) Toast genérico (requiere <div id="toast-container"></div> en tu HTML)
+function showToast(message, type = 'info') {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  const icon = type==='success' ? 'fa-check-circle'
+             : type==='error'   ? 'fa-exclamation-circle'
+             : 'fa-info-circle';
+  toast.innerHTML = `
+    <i class="fas ${icon}"></i>
+    <span>${message}</span>
+    <button class="toast-close">&times;</button>
+  `;
+  container.appendChild(toast);
+  // animación entrada/salida
+  setTimeout(()=> toast.classList.add('show'), 50);
+  setTimeout(()=>{
+    toast.classList.remove('show');
+    setTimeout(()=> container.removeChild(toast), 300);
+  }, 4000);
+  toast.querySelector('.toast-close').onclick = () => {
+    toast.classList.remove('show');
+    setTimeout(()=> container.removeChild(toast), 300);
+  };
+}
+
 // ─── 1) Renderizar el carrito ─────────────────────────────────
 async function renderCarrito() {
   const token = getToken();
@@ -135,7 +161,9 @@ async function saveNewDireccion() {
   const calle  = document.getElementById('dir-calle').value.trim();
   const ciudad = document.getElementById('dir-ciudad').value.trim();
   const cp     = document.getElementById('dir-codpostal').value.trim();
-  if (!calle || !ciudad || !cp) return alert('Completa todos los campos');
+  if (!calle || !ciudad || !cp) {
+    return showToast('❌ Completa todos los campos','error');
+  }
 
   const res = await fetch(`${API_BASE}/direcciones`, {
     method: 'POST',
@@ -146,12 +174,11 @@ async function saveNewDireccion() {
     body: JSON.stringify({ Calle: calle, Ciudad: ciudad, CodigoPostal: cp })
   });
   if (!res.ok) {
-    alert('Error guardando dirección');
-    return;
+    return showToast('❌ Error guardando dirección','error');
   }
 
   await loadCheckoutData();
-  document.getElementById('new-direccion-form').hidden = true;
+  newF.hidden = true;
 }
 
 // ─── 5) Enviar pedido (checkout) ──────────────────────────────
@@ -161,8 +188,7 @@ async function submitCheckout(e) {
   const dirID    = +document.getElementById('select-direccion').value;
   const metodoID = +document.getElementById('select-metodo').value;
   if (!dirID || !metodoID) {
-    alert('Debes elegir dirección y método de pago');
-    return;
+    return showToast('❌ Debes elegir dirección y método de pago','error');
   }
 
   const btn = e.target.querySelector('button[type=submit]');
@@ -170,6 +196,7 @@ async function submitCheckout(e) {
   btn.textContent = 'Procesando…';
 
   try {
+    // 1) Creo el pedido
     const res = await fetch(`${API_BASE}/pedidos`, {
       method: 'POST',
       headers: {
@@ -182,25 +209,34 @@ async function submitCheckout(e) {
         cuponID:      null
       })
     });
-    if (!res.ok) throw new Error((await res.json()).error || res.statusText);
-
-    // 1) Obtengo la URL del PDF
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || res.statusText);
+    }
     const { pdfUrl } = await res.json();
 
-    // 2) Abro la factura en una nueva pestaña (o descarga directa)
+    // 2) Cierro modal y refresco carrito
+    closeModal();
+    await renderCarrito();
+
+    // 3) Descargo la boleta vía blob (mantengo la pestaña principal intacta)
     const fullUrl = pdfUrl.startsWith('http')
       ? pdfUrl
       : `${API_BASE.replace(/\/api\/?$/,'')}${pdfUrl}`;
-    window.open(fullUrl, '_blank');
+    const pdfRes = await fetch(fullUrl, {
+      method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (!pdfRes.ok) throw new Error('No se pudo descargar factura');
+    const blob    = await pdfRes.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    window.open(blobUrl, '_blank');
 
-    // 3) Cierro el modal
-    closeModal();
-    alert('✅ Pago realizado con éxito. Tu factura se ah descargando.');
-    // 4) Re-renderizo el carrito (ya vacío)
-    await renderCarrito();
+    // 4) Notifico éxito
+    showToast('✅ Compra completada. Tu factura se está descargando','success');
 
   } catch (err) {
-    alert('❌ ' + err.message);
+    showToast('❌ ' + err.message,'error');
   } finally {
     // 5) Normalizo el botón
     btn.disabled    = false;
@@ -208,34 +244,29 @@ async function submitCheckout(e) {
   }
 }
 
-// ─── 6) Arrancar todo al cargar la página ────────────────────
+// ─── 6) Inicialización ────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   renderCarrito();
 
-  // Al hacer click en “Pagar Ahora”:
   document.getElementById('btn-pay')
     .addEventListener('click', () => {
       openModal();
       loadCheckoutData();
     });
 
-  // Cerrar modal:
   document.getElementById('btn-close-modal')
     .addEventListener('click', closeModal);
   document.getElementById('btn-cancel-modal')
     .addEventListener('click', closeModal);
 
-  // “+ Nueva dirección”:
   document.getElementById('btn-new-direccion')
     .addEventListener('click', () => {
       document.getElementById('new-direccion-form').hidden = false;
     });
 
-  // Guardar nueva dirección:
   document.getElementById('btn-save-dir')
     .addEventListener('click', saveNewDireccion);
 
-  // Enviar formulario de checkout:
   document.getElementById('form-checkout')
     .addEventListener('submit', submitCheckout);
 });

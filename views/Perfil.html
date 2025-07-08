@@ -9,10 +9,13 @@
 </head>
 <body>
   <div class="perfil-dashboard">
+
     <!-- Banner -->
     <div class="banner">
       <img id="banner-img" src="" alt="Banner">
-      <label for="banner-input" class="btn-edit-banner"><i class="bi bi-camera-fill"></i></label>
+      <label for="banner-input" class="btn-edit-banner">
+        <i class="bi bi-camera-fill"></i>
+      </label>
       <input type="file" id="banner-input" accept="image/*" hidden>
     </div>
 
@@ -20,7 +23,9 @@
     <div class="header">
       <div class="avatar-wrap">
         <img id="avatar-img" src="" alt="Avatar">
-        <label for="avatar-input" class="btn-edit-avatar"><i class="bi bi-camera-fill"></i></label>
+        <label for="avatar-input" class="btn-edit-avatar">
+          <i class="bi bi-camera-fill"></i>
+        </label>
         <input type="file" id="avatar-input" accept="image/*" hidden>
       </div>
       <div class="user-info">
@@ -29,12 +34,8 @@
       </div>
     </div>
 
-    <!-- Métricas -->
+    <!-- Métricas reducidas -->
     <div class="metrics">
-      <div class="metric">
-        <div class="value" id="m-publicaciones">0</div>
-        <div class="label">Publicaciones</div>
-      </div>
       <div class="metric">
         <div class="value" id="m-compras">0</div>
         <div class="label">Compras</div>
@@ -49,43 +50,24 @@
       </div>
     </div>
 
-    <!-- Pestañas -->
-    <nav class="tabs">
-      <button data-tab="resumen"    class="active">Resumen</button>
-      <button data-tab="publicaciones">Publicaciones</button>
-      <button data-tab="compras">Compras</button>
-      <button data-tab="reseñas">Reseñas</button>
-      <button data-tab="configuracion">Configuración</button>
-    </nav>
+    <!-- Pestañas simplificadas -->
+   <nav class="tabs">
+  <button data-tab="compras" class="active">Compras</button>
+  <button data-tab="reseñas">Reseñas</button>
+  <button data-tab="favoritos">Favoritos</button>
+</nav>
 
     <!-- Contenido de pestañas -->
-    <section class="tab-content" id="tab-resumen">
-      <p>Bienvenido a tu resumen, aquí verás un panorama rápido de tu actividad.</p>
-    </section>
-    <section class="tab-content" id="tab-publicaciones" hidden>
-      <div id="publicaciones-list">Cargando publicaciones…</div>
-    </section>
-    <section class="tab-content" id="tab-compras" hidden>
+    <section class="tab-content" id="tab-compras">
       <div id="compras-list">Cargando compras…</div>
     </section>
     <section class="tab-content" id="tab-reseñas" hidden>
       <div id="resenas-list">Cargando reseñas…</div>
     </section>
-    <section class="tab-content" id="tab-configuracion" hidden>
-      <!-- Reutiliza aquí tu Perfil.js para editar nombre/email/avatar/banner -->
-      <form id="perfil-config-form">
-        <div class="form-group">
-          <label>Nombre de usuario</label>
-          <input type="text" id="cfg-nombre" required>
-        </div>
-        <div class="form-group">
-          <label>Correo electrónico</label>
-          <input type="email" id="cfg-email" required>
-        </div>
-        <button type="submit" class="btn-save">Guardar cambios</button>
-        <div id="cfg-message" class="message"></div>
-      </form>
+    <section class="tab-content" id="tab-favoritos" hidden>
+      <div id="favoritos-list">Cargando favoritos…</div>
     </section>
+
   </div>
 
   <script src="../js/config.js"></script>

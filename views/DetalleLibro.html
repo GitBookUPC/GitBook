@@ -46,12 +46,13 @@
         <div class="libro-header">
           <h1 id="titulo-libro" class="titulo-principal"></h1>
           <div class="libro-meta">
-            <span id="categoria-libro" class="categoria-badge"></span>
+            <!-- Categoria si quieres mostrarla -->
+            <!--<span class="categoria-badge" id="categoria-libro"></span>-->
             <div class="rating-display">
-              <div class="stars">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-              </div>
-              <span class="rating-text">(0/5)</span>
+              <!-- Estrellas dinámicas -->
+              <span id="rating-stars">☆☆☆☆☆</span>
+              <!-- Conteo dinámico -->
+              <span id="rating-count">(0)</span>
             </div>
           </div>
         </div>
@@ -85,6 +86,7 @@
               <i class="fas fa-spinner fa-spin"></i>
             </div>
           </button>
+          <!-- Botón Favoritos dinámico -->
           <button class="btn-favorito" title="Agregar a favoritos">
             <i class="far fa-heart"></i>
           </button>
@@ -131,7 +133,7 @@
             </label>
             <textarea 
               id="comment-text" 
-              placeholder="Comparte tu opinión sobre este libro. ¿Qué te pareció la historia, los personajes, el estilo de escritura...?" 
+              placeholder="Comparte tu opinión sobre este libro..."
               required
               maxlength="500"
             ></textarea>
@@ -150,7 +152,7 @@
         </form>
       </div>
 
-      <!-- Lista de comentarios (aquí inyecta JS) -->
+      <!-- Filtros de comentarios -->
       <div class="comments-list-container">
         <div class="comments-filter">
           <button class="filter-btn active" data-filter="all">
@@ -176,7 +178,7 @@
     </div>
   </div>
 
-  <!-- Modal / Toast -->
+  <!-- Modal / Toast de carrito -->
   <div id="cart-toast" class="cart-toast hidden">
     <p>✅ Libro añadido al carrito</p>
     <div class="cart-toast__actions">
@@ -185,9 +187,10 @@
     </div>
   </div>
 
-  <!-- Toast notifications -->
+  <!-- Contenedor global para notificaciones toast -->
   <div id="toast-container" class="toast-container"></div>
 
+  <!-- Scripts -->
   <script src="../js/config.js"></script>
   <script src="../js/DetalleLibro.js"></script>
 </body>

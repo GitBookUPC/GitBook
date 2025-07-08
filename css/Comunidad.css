@@ -1,117 +1,284 @@
-body {
-  background: #f7f7f7;
-  margin: 0; font-family: sans-serif;
-}
-.comunidad-container {
-  max-width: 700px;
-  margin: 20px auto;
-}
-.comunidad-container h1 {
-  color: #2e7d32;
-  margin-bottom: 16px;
+:root {
+  --primary:    #2c3e50;
+  --secondary:  #30a409;
+  --accent:     #e74c3c;
+  --bg:         #f8f9fa;
+  --card-bg:    #ffffff;
+  --border:     #e0e6ed;
+  --shadow:     rgba(0,0,0,0.05);
 }
 
-/* ── Post Form ── */
-.post-form {
-  background: #fff;
-  padding: 16px;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+body {
+  background: var(--bg);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0; padding: 0;
 }
-.post-form textarea {
-  width: 100%;
-  min-height: 80px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
-  resize: vertical;
+
+.comunidad-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* ====== NEW POST ====== */
+.new-post {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.new-post h2 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+#form-new-post textarea {
+  width: 100%; min-height: 80px;
+  padding: .75rem; border: 1px solid var(--border);
+  border-radius: 4px; resize: vertical;
   font-size: 1rem;
 }
-.form-actions {
+
+.controls {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-top: .75rem;
+}
+
+.btn-file {
+  position: relative; font-size: 1.2rem;
+  color: var(--primary); cursor: pointer;
+}
+
+.btn-file input {
+  position: absolute; left: 0; top: 0;
+  width: 100%; height: 100%; opacity: 0;
+  cursor: pointer;
+}
+
+.btn-submit {
+  background: var(--secondary);
+  color: #fff; border: none;
+  padding: .5rem 1rem; border-radius: 4px;
+  cursor: pointer; transition: .3s;
+}
+.btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+
+.preview {
+  position: relative; margin-top: 1rem;
+}
+.preview img {
+  max-width: 100%; border-radius: 4px;
+}
+#btn-clear-preview {
+  position: absolute; top: 4px; right: 4px;
+  background: rgba(0,0,0,.6); color: #fff;
+  border: none; border-radius: 50%;
+  width: 24px; height: 24px;
+  cursor: pointer;
+}
+
+/* ====== FEED ====== */
+.posts-feed .post {
+  max-width: 600px;
+  margin: 1.5rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
   display: flex;
-  align-items: center;
-  margin-top: 8px;
-  gap: 8px;
+  flex-direction: column;
 }
-.btn-image {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: #eceff1;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #555;
-  font-size: 0.9rem;
+
+.post .header {
+  display: flex; align-items: center;
+  gap: .75rem; margin-bottom: .5rem;
 }
-.btn-image:hover { background: #e0e0e0; }
-.btn-post {
-  margin-left: auto;
-  background: #2e7d32;
-  color: #fff;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 4px;
-  cursor: pointer;
+
+.post .header img.avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%; object-fit: cover;
 }
-.btn-post:disabled {
-  background: #a5d6a7;
-  cursor: not-allowed;
+
+.post .header .info .author {
+  font-weight: 600; color: var(--primary);
 }
-.image-preview {
-  display: block;
-  max-width: 100%;
-  margin-top: 8px;
-  border-radius: 4px;
+.post .header .info .date {
+  font-size: .85rem; color: #777;
+}
+
+.post .content p {
+  margin: .75rem 0;
+  color: var(--primary);
+}
+
+.post .content img {
+  width: 100%;
+  height: 300px;
   object-fit: cover;
 }
 
-/* ── Feed ── */
-.feed .post-card {
-  background: #fff;
-  margin-top: 16px;
-  padding: 16px;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+.post .actions {
+  display: flex; gap: 1.5rem;
+  font-size: .9rem; color: #555;
+  margin-top: .5rem;
 }
-.post-header {
-  font-weight: bold;
-  margin-bottom: 4px;
+
+.post .actions button {
+  background: none; border: none;
+  display: flex; align-items: center;
+  gap: .25rem; cursor: pointer;
+  transition: .2s;
 }
-.post-header .timestamp {
-  color: #888;
-  font-size: 0.85rem;
-  margin-left: 8px;
+
+.post .actions button:hover { color: var(--secondary); }
+
+.post .actions button.liked i   { color: var(--accent); }
+.post .actions button.reacted i { color: var(--secondary); }
+
+.loading, .error {
+  text-align: center; color: #666;
+  padding: 2rem 0;
 }
-.post-content {
-  margin: 8px 0;
-}
-.post-content img {
-  max-width: 100%;
-  border-radius: 4px;
-  margin-top: 8px;
-}
-.post-footer {
+.error { color: var(--accent); }
+
+
+/* — Área de comentarios (formulario) más agradable — */
+.form-comentario {
   display: flex;
-  gap: 16px;
-  color: #555;
-  font-size: 0.9rem;
+  gap: 0;
+  border-top: 1px solid #eee;
+  padding: 0.75rem;
 }
-.post-footer button {
+.form-comentario input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  font-size: 0.95rem;
+}
+.form-comentario button {
+  padding: 0 1rem;
+  border: 1px solid #ddd;
+  border-left: none;
+  background: #2e7d32;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+/* — Cada comentario en tarjeta ligera — */
+.comentario-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-top: 1px solid #f1f1f1;
+}
+.info-comentario {
+  flex: 1;
+}
+.info-comentario p {
+  margin: 0.5rem 0 0;
+}
+
+/* — Botones de reacción y share más espaciales — */
+.post .actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #eee;
+}
+.post .actions button {
   background: none;
   border: none;
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
 }
-.post-footer button:hover {
-  color: #2e7d32;
+.post .actions button span {
+  font-size: 0.95rem;
+}
+.post .actions button[data-tipo="like"] i { color: #3498db; }
+.post .actions button[data-tipo="dislike"] i { color: #000; }
+.post .actions button[data-tipo="love"] i { color: #e74c3c; }
+.post .actions button.liked,
+.post .actions button.reacted {
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
 }
 
-/* ── Loading ── */
-.loading {
-  text-align: center;
-  color: #666;
-  margin-top: 16px;
+/* — Formulario “¿Qué quieres compartir hoy?” más ancho — */
+.new-post {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+#form-new-post textarea {
+  min-height: 120px;
+}
+:root {
+  --reaction-like:    #3498db;
+  --reaction-dislike: #2c3e50;
+  --reaction-love:    #e74c3c;
+  --post-border:      #2e7d32;
+}
+
+/* ── Cards más “clickables” con borde de acento ── */
+.post {
+  border-left: 4px solid var(--post-border);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 1.5rem;
+}
+.post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ── Ajuste de botones de reacción ── */
+.post .actions button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.post .actions button:hover {
+  background: rgba(0,0,0,0.03);
+}
+
+/* colores de iconos por defecto */
+.post .actions button[data-tipo="like"]    i { color: var(--reaction-like);    }
+.post .actions button[data-tipo="dislike"] i { color: var(--reaction-dislike); }
+.post .actions button[data-tipo="love"]    i { color: var(--reaction-love);    }
+
+/* estado activo: fondo y texto blancos */
+.post .actions button[data-tipo="like"].active {
+  background: var(--reaction-like);
+  border-color: var(--reaction-like);
+  color: white;
+}
+.post .actions button[data-tipo="dislike"].active {
+  background: var(--reaction-dislike);
+  border-color: var(--reaction-dislike);
+  color: white;
+}
+.post .actions button[data-tipo="love"].active {
+  background: var(--reaction-love);
+  border-color: var(--reaction-love);
+  color: white;
+}
+
+/* ── Tiny estilo extra para el share ── */
+.post .actions button[data-tipo="share"] {
+  margin-left: auto;
+  padding: 0.4rem;
+}
+.post .actions button[data-tipo="share"] i {
+  color: #555;
 }
