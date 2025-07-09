@@ -15,6 +15,9 @@ document.getElementById('form-register')
     const email    = emailInput.value.trim();
     const password = passwordInput.value;
 
+    // Expresión regular básica para validar correo electrónico
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     // Validaciones básicas
     if (!nombre) {
       showFieldError('nombre-error', 'El usuario es obligatorio');
@@ -22,6 +25,10 @@ document.getElementById('form-register')
     }
     if (!email) {
       showFieldError('email-error', 'El correo es obligatorio');
+      return;
+    }
+    if (!emailPattern.test(email)) {
+      showFieldError('email-error', 'Ingresa un correo electrónico válido');
       return;
     }
     if (!password) {
